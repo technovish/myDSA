@@ -30,12 +30,17 @@ class Stack:
             return "Stack is Empty"
         else:
             return self.list[len(self.list)-1]
+        
+    def delete(self):
+        self.list = None
 
 
 sl = Stack()
 sl.push(1)
 sl.push(2)
 sl.push(3)
+sl.push(4)
 sl.pop()
 sl.peek()
+sl.delete()
 print(sl)
