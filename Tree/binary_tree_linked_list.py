@@ -85,7 +85,50 @@ def levelOrderTraverse(rootnode):
                 customq.enqueue(root.value.right)
         
         '''
-            
-       
 
-levelOrderTraverse(bt)
+def levelorder(rootnode) -> list:
+    if rootnode is None:
+        return []
+    queue = [rootnode]
+    next_queue = []
+    level = []
+    result = []
+
+    while queue != []:
+        for root in queue:
+            level.append(root.value)
+            if root.left is not None:
+                next_queue.append(root.left)
+            if root.right is not None:
+                next_queue.append(root.right)
+        result.append(level)
+        level = []
+        queue = next_queue
+        next_queue = []
+    return result
+            
+#print(levelorder(bt))
+#levelOrderTraverse(bt)
+
+def searchNode(rootnode, searchValue):
+    if not rootnode:
+        return "Tree is empty"
+    else:
+        queue = [rootnode]
+        next_queue = []
+        while queue != []:
+            for root in queue:
+                if not root:
+                    return "Value nt found"
+                if root.value == searchValue:
+                    return "Found"
+                else:
+                    if root.left is not None:
+                        next_queue.append(root.left)
+                    if root.right is not None:
+                        next_queue.append(root.right)
+                queue=next_queue
+        return "Value Not Found"
+print(searchNode(bt,"Hot"))
+
+
