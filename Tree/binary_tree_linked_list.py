@@ -70,21 +70,6 @@ def levelOrderTraverse(rootnode):
             levelOrderTraverse(rootnode.left)
             levelOrderTraverse(rootnode.right)
 
-''' def levelOrderTraverse(rootnode):
-    if not rootnode:
-        return 
-    else:
-        customq = queue.Queue()
-        customq.enqueue(rootnode)
-        while not (customq.isEmpty()):
-            root = customq.dequeue()
-            print(root.value.value)
-            if (root.value.left is not None):
-                customq.enqueue(root.value.left)
-            if(root.value.right is not None):
-                customq.enqueue(root.value.right)
-        
-        '''
 
 def levelorder(rootnode) -> list:
     if rootnode is None:
@@ -119,9 +104,9 @@ def searchNode(rootnode, searchValue):
         while queue != []:
             for root in queue:
                 if not root:
-                    return "Value nt found"
+                    return "Value not found"
                 if root.value == searchValue:
-                    return "Found"
+                    return root
                 else:
                     if root.left is not None:
                         next_queue.append(root.left)
@@ -129,6 +114,111 @@ def searchNode(rootnode, searchValue):
                         next_queue.append(root.right)
                 queue=next_queue
         return "Value Not Found"
-print(searchNode(bt,"Hot"))
+#print(searchNode(bt,"Drinks"))
 
+def insertnode(rootnode, newnode):
+    if not rootnode:
+        return "Its's empty"
+    else:
+        queue = [rootnode]
+        next_queue = []
+        while queue != []:
+            for node in queue:
+                if node.left is None:
+                    node.left = newnode
+                    print("Left Inserted")
+                    return True
+                elif node.right is None:
+                    node.right = newnode
+                    print("Right Inserted")
+                    return True
+                else:
+                    if node.left is not None:
+                        next_queue.append(node.left)
+                    if node.right is not None:
+                        next_queue.append(node.right)     
+            queue = next_queue
+            next_queue = []  
 
+def deepNode(rootnode):
+    if not rootnode:
+        return "Its's empty"
+    else:
+        queue = [rootnode]
+        next_queue = []
+        while queue != []:
+            for node in queue:
+                if node.left is not None:
+                    next_queue.append(node.left)
+                if node.right is not None:
+                    next_queue.append(node.right)
+            if next_queue == []:
+                return queue[-1]
+            queue = next_queue
+            next_queue = []  
+
+def deleteDeepNode(rootnode, deepnode):
+    if not rootnode:
+        return "No root node"
+    else:
+        queue = [rootnode]
+        next_queue = []
+
+        while queue != []:
+            for node in queue:
+                if node.right == deepnode:
+                    node.right = None
+                elif node.left == deepnode:
+                    node.left = None
+                else:
+                    if node.left is not None:
+                        next_queue.append(node.left)
+                    if node.right is not None:
+                        next_queue.append(node.right)
+            queue = next_queue
+            next_queue = []                   
+
+def deletenode(rootnode, delval):
+    if not rootnode:
+        return "Its's empty"
+    else:
+        deepnode = deepNode(rootnode)
+        queue = [rootnode]
+        next_queue = []
+        while queue != []:
+            for node in queue:
+                if node.value == delval:
+                    node.value = deepnode.value
+                    deleteDeepNode(rootnode,deepnode)
+                    return True
+                else:
+                    if node.left is not None:
+                        next_queue.append(node.left)
+                    if node.right is not None:
+                        next_queue.append(node.right)
+            queue = next_queue
+            next_queue = []
+
+def delfulltree(rootnode):
+    if not rootnode:
+        return "No root node"
+    else:
+        rootnode.value = None
+        rootnode.left = None
+        rootnode.right = None
+        print("Deleted")
+
+new_node = Node("Milkshake")
+node2 = Node("soda")
+icet = Node("icetea")
+insertnode(bt,new_node)
+insertnode(bt,node2)
+insertnode(bt,icet)
+print(levelorder(bt))
+deletenode(bt,"Cold")
+print(levelorder(bt))
+delfulltree(bt)
+print(levelorder(bt))
+#print(deepNode(bt).value)
+
+#print(searchNode(bt,"Cold").right.value)
