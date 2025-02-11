@@ -62,12 +62,40 @@ def search(rootnode,serval):
             else:
                return search(rootnode.right,serval)
 
+def minimum_value(rootnode):
+    current = rootnode
+    while(current.left is not None):
+        current = current.left
+    return current
+
+def delete(rootnode,value):
+    if rootnode is None:
+        return rootnode
+    if value < rootnode.value:
+        rootnode.left = delete(rootnode.left,value)
+    elif value > rootnode.value:
+        rootnode.right = delete(rootnode.right,value)
+    else:
+        if rootnode.left is None:
+            temp = rootnode.right
+            rootnode = None
+            return temp
+        if rootnode.right is None:
+            temp = rootnode.left
+            rootnode = None
+            return temp
+        temp = minimum_value(rootnode.right)
+        rootnode.value = temp.value
+        rootnode.right = delete(rootnode.right, temp.value)
+    return rootnode
+
 
 bst = Node(50)
 insert(bst,25)
 insert(bst,22)
 insert(bst,60)
 insert(bst,26)
-print(search(bst,25))
-
+insert(bst,23)
+print(search(bst,23))
+delete(bst,25)
 print(levelorder(bst))
