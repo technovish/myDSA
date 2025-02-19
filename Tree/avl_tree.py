@@ -52,13 +52,7 @@ def postOrderTraverse(rootnode):
     postOrderTraverse(rootnode.right)
     print(rootnode.value)
 
-def getheight(rootnode):
-    if not rootnode:
-        return 0
-    else:
-        return rootnode.height
-
-#Left Left Condition = right rotation
+#Left Left Condition or Right left condition = right rotation
 def rightRotation(disbalancedNode):
     newroot = disbalancedNode.left
     disbalancedNode.left = newroot.right
@@ -67,7 +61,7 @@ def rightRotation(disbalancedNode):
     newroot.height = 1 + max(getheight(newroot.left), getheight(newroot.right))
     return newroot
 
-#Left right condition = left rotation
+#Right right or Left right condition = left rotation
 def leftRotation(disbalancedNode):
     newroot = disbalancedNode.right
     disbalancedNode.right = newroot.left
@@ -75,6 +69,12 @@ def leftRotation(disbalancedNode):
     disbalancedNode.height = 1 + max(getheight(disbalancedNode.left), getheight(disbalancedNode.right))
     newroot.height = 1 + max(getheight(newroot.left), getheight(newroot.right))
     return newroot
+
+def getheight(rootnode):
+    if not rootnode:
+        return 0
+    else:
+        return rootnode.height
 
 def get_balance(rootnode):
     if not rootnode:
@@ -105,16 +105,17 @@ def insert(rootnode, value):
         return leftRotation(rootnode)
     return rootnode
 
-avl = Node(100)
+
+avl = Node(70)
+avl = insert(avl,50)
 avl = insert(avl,90)
-avl = insert(avl,85)
+avl = insert(avl,30)
+avl = insert(avl,60)
 avl = insert(avl,80)
-avl = insert(avl,70)
-avl = insert(avl,69)
-avl = insert(avl,68)
-avl = insert(avl,98)
-avl = insert(avl,99)
+avl = insert(avl,100)
+avl = insert(avl,20)
+avl = insert(avl,40)
 print(levelorder(avl))
 print(getheight(avl))
-print(avl.right.right.value)
+#print(avl.right.right.value)
 #print(get_balance(avl))

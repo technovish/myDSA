@@ -16,8 +16,13 @@ class Queue:
             if current_node.next is not None:
                 result += '->'
             current_node = current_node.next
-
         return result
+    
+    def isEmpty(self):
+        if self.head == None and self.tail == None:
+            return True
+        else:
+            return False
     
     def enqueue(self, value):
         new_node = Node(value)
@@ -38,12 +43,3 @@ class Queue:
             self.head = self.head.next
 
 
-ql = Queue()
-ql.enqueue(10)
-ql.enqueue(20)
-ql.enqueue(30)
-ql.dequeue()
-ql.dequeue()
-ql.dequeue()
-ql.dequeue()
-print(ql)

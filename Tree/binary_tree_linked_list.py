@@ -5,7 +5,6 @@
 # - Searching in tree
 # - Traverse all nodes
 # - Deletion of tree
-import queue_linkedlist as queue
 
 class Node:
     def __init__(self,value):
@@ -54,21 +53,6 @@ def postOrderTraverse(rootnode):
     print(rootnode.value)
 
 #postOrderTraverse(bt)
-
-def levelOrderTraverse(rootnode):
-    if not rootnode:
-        return 
-    else:
-        lst = []
-        lst.append(rootnode.value)
-        for i in range(len(lst)):
-            if(rootnode.left is not None):
-                lst.append(rootnode.left.value)
-            if(rootnode.right is not None):
-                lst.append(rootnode.right.value)
-            print(rootnode.value)
-            levelOrderTraverse(rootnode.left)
-            levelOrderTraverse(rootnode.right)
 
 
 def levelorder(rootnode) -> list:

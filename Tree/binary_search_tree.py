@@ -2,6 +2,10 @@
 #Left -> Value of node is less than parent
 #Right - > value of node is greater than parent
 #It performs faster than binary tree when inserting or deleting nodes
+#1. Insert
+#2. Search
+#3. Delete
+#4. Traversal
 
 class Node:
     def __init__(self, value):
@@ -76,26 +80,29 @@ def delete(rootnode,value):
     elif value > rootnode.value:
         rootnode.right = delete(rootnode.right,value)
     else:
+        #Case1: Root node has only right child
         if rootnode.left is None:
-            temp = rootnode.right
-            rootnode = None
-            return temp
+            return rootnode.right
+        #Case2: Root node has only left child
         if rootnode.right is None:
-            temp = rootnode.left
-            rootnode = None
-            return temp
+            return rootnode.left
+        #Case3: Root node has no child or replace the root node with the left most of the right child
         temp = minimum_value(rootnode.right)
         rootnode.value = temp.value
         rootnode.right = delete(rootnode.right, temp.value)
     return rootnode
 
 
-bst = Node(50)
-insert(bst,25)
-insert(bst,22)
-insert(bst,60)
-insert(bst,26)
-insert(bst,23)
-print(search(bst,23))
-delete(bst,25)
+bst = Node(5)
+insert(bst,3)
+insert(bst,6)
+insert(bst,2)
+insert(bst,4)
+insert(bst,7)
+insert(bst,3.5)
+insert(bst,3.25)
+
+#bst = Node(4)
+#print(search(bst,23))
+delete(bst,3)
 print(levelorder(bst))
